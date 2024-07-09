@@ -1,4 +1,3 @@
-// src/components/Cart.jsx
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -11,16 +10,16 @@ function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
-  const handleIncrement = (id) => {
-    dispatch(incrementQuantity(id));
+  const handleIncrement = (uid) => {
+    dispatch(incrementQuantity(uid));
   };
 
-  const handleDecrement = (id) => {
-    dispatch(decrementQuantity(id));
+  const handleDecrement = (uid) => {
+    dispatch(decrementQuantity(uid));
   };
 
-  const handleRemove = (id) => {
-    dispatch(removeItem(id));
+  const handleRemove = (uid) => {
+    dispatch(removeItem(uid));
   };
 
   const totalAmount = cartItems.reduce(
@@ -35,12 +34,12 @@ function Cart() {
         <div className="w-full lg:w-3/4">
           {cartItems.map((item) => (
             <div
-              key={item.id}
+              key={item.uid}
               className="flex items-center justify-between mb-4 p-4 border rounded-lg"
             >
               <div className="flex items-center">
                 <img
-                  src={item.image}
+                  src={item.images[0]}
                   alt={item.title}
                   className="w-20 h-20 object-cover rounded-lg"
                 />
@@ -51,21 +50,21 @@ function Cart() {
               </div>
               <div className="flex items-center">
                 <button
-                  onClick={() => handleDecrement(item.id)}
+                  onClick={() => handleDecrement(item.uid)}
                   className="btn btn-secondary btn-sm"
                 >
                   -
                 </button>
                 <span className="mx-2">{item.quantity}</span>
                 <button
-                  onClick={() => handleIncrement(item.id)}
+                  onClick={() => handleIncrement(item.uid)}
                   className="btn btn-secondary btn-sm"
                 >
                   +
                 </button>
               </div>
               <button
-                onClick={() => handleRemove(item.id)}
+                onClick={() => handleRemove(item.uid)}
                 className="btn btn-danger btn-sm"
               >
                 Remove

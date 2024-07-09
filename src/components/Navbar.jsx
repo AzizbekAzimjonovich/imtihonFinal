@@ -66,7 +66,6 @@ function Navbar() {
 
         <div className="flex-none gap-4 items-center capitalize">
           <p className="font-bold">{user?.displayName}</p>{" "}
-          {/* Handle undefined user */}
           <div className="dropdown dropdown-end">
             <div
               tabIndex={0}

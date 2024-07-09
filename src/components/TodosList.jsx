@@ -43,7 +43,7 @@ function TodosList({ data }) {
         Recipes
       </h1>
       <hr />
-      <div className="flex flex-wrap gap-11 mt-11">
+      <div className="flex justify-between columns-7xl  gap-11 mt-11">
         {data &&
           data.map((todo) => (
             <div

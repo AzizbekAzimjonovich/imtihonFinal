@@ -174,7 +174,7 @@ function Create() {
         </div>
 
         <select
-          className="select select-bordered w-full max-w-xs"
+          className="flex select select-bordered w-full "
           name="category"
           defaultValue=""
         >

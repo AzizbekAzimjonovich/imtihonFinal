@@ -55,6 +55,7 @@ const Weather = () => {
     <div className=" flex  items-center">
       {weather ? (
         <div className="text-center flex justify-between gap-3  items-center ">
+          <p>{weather.name}</p>
           <p className="text-lg font-semibold">{weather.main.temp}°C</p>
         </div>
       ) : (

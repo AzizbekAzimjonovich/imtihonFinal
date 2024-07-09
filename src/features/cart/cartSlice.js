@@ -1,5 +1,5 @@
-// src/features/cart/cartSlice.js
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
   items: JSON.parse(localStorage.getItem("cartItems")) || [],
@@ -10,32 +10,26 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const itemIndex = state.items.findIndex(
-        (item) => item.id === action.payload.id
-      );
-      if (itemIndex >= 0) {
-        state.items[itemIndex].quantity += action.payload.quantity;
-      } else {
-        state.items.push(action.payload);
-      }
+      const newItem = { ...action.payload, uid: uuidv4() };
+      state.items.push(newItem);
       localStorage.setItem("cartItems", JSON.stringify(state.items));
     },
     incrementQuantity: (state, action) => {
-      const item = state.items.find((item) => item.id === action.payload);
+      const item = state.items.find((item) => item.uid === action.payload);
       if (item) {
         item.quantity++;
       }
       localStorage.setItem("cartItems", JSON.stringify(state.items));
     },
     decrementQuantity: (state, action) => {
-      const item = state.items.find((item) => item.id === action.payload);
+      const item = state.items.find((item) => item.uid === action.payload);
       if (item && item.quantity > 1) {
         item.quantity--;
       }
       localStorage.setItem("cartItems", JSON.stringify(state.items));
     },
     removeItem: (state, action) => {
-      state.items = state.items.filter((item) => item.id !== action.payload);
+      state.items = state.items.filter((item) => item.uid !== action.payload);
       localStorage.setItem("cartItems", JSON.stringify(state.items));
     },
     clearCart: (state) => {
