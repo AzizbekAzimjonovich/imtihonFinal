@@ -1,12 +1,15 @@
+import React from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { deleteDoc, updateDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function TodosList({ data }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const deleteTodo = (id) => {
     deleteDoc(doc(db, "todos", id))
@@ -33,8 +36,7 @@ function TodosList({ data }) {
   };
 
   const navigateToSingleProduct = (id) => {
-    // SingleProduct sahifasiga o'tkazish
-    window.location.href = `/home/${id}`;
+    navigate(`/home/${id}`);
   };
 
   return (
@@ -43,9 +45,9 @@ function TodosList({ data }) {
         Recipes
       </h1>
       <hr />
-      <div className="flex justify-between columns-7xl  gap-11 mt-11">
+      <div className="flex flex-wrap gap-11 mt-11">
         {data &&
-          data.map((todo) => (
+          data.slice(0, 3).map((todo) => (
             <div
               className="card bg-base-100 w-96 shadow-xl cursor-pointer"
               key={todo.id}
