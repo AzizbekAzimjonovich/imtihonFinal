@@ -1,6 +1,6 @@
 // src/components/SingleProduct.jsx
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import { useDispatch } from "react-redux";
@@ -51,7 +51,17 @@ function SingleProduct() {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="carousel carousel-center bg-neutral rounded-box  space-x-4 p-4">
+      <div className="breadcrumbs text-sm mb-5">
+        <ul>
+          <li>
+            <Link to={"/"}>Home</Link>
+          </li>
+          <li>
+            <a>SingleProduct</a>
+          </li>
+        </ul>
+      </div>
+      <div className="carousel carousel-center bg-neutral rounded-box  space-x-4 p-4 h-96">
         {product.images.map((img, index) => (
           <div className="carousel-item" key={index}>
             <img src={img} alt={`Image ${index}`} className="rounded-box" />

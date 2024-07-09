@@ -41,10 +41,11 @@ function TodosList({ data }) {
 
   return (
     <div className="flex flex-col w-full">
+      <hr className="mb-5" />
+
       <h1 className="text-2xl font-semibold md:text-start text-center mb-6">
         Recipes
       </h1>
-      <hr />
       <div className="flex flex-wrap gap-11 mt-11">
         {data &&
           data.slice(0, 3).map((todo) => (
