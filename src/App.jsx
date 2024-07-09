@@ -6,7 +6,15 @@ import {
 
 import { login, isAuthChange } from "./app/userSlice";
 
-import { Home, Login, Register, Create } from "./pages";
+import {
+  Home,
+  Login,
+  Register,
+  Create,
+  PieChart,
+  SingleProduct,
+  Cart,
+} from "./pages";
 
 //layouts
 import MainLayout from "./layouts/MainLayout";
@@ -43,6 +51,18 @@ function App() {
           path: "/create",
           element: <Create />,
           action: createAction,
+        },
+        {
+          path: "/home/:id",
+          element: <SingleProduct />,
+        },
+        {
+          path: "/piechart",
+          element: <PieChart />,
+        },
+        {
+          path: "/cart",
+          element: <Cart />,
         },
       ],
     },

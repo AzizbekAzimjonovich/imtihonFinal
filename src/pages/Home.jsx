@@ -7,7 +7,7 @@ function Home() {
   const { data } = useCollection("todos", ["uid", "==", user.uid]);
 
   return (
-    <div className="container align-element pr-5 pl-5 grid grid-cols-1 md:grid-cols-2">
+    <div className="">
       <div>{data && <TodosList data={data} />}</div>
     </div>
   );

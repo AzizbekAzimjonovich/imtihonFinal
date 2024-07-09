@@ -27,6 +27,19 @@ export const action = async ({ request }) => {
     images.push(image);
   });
 
+  if (
+    !title ||
+    !cookingTime ||
+    !method ||
+    !category ||
+    !price ||
+    ingredients.length === 0 ||
+    images.length === 0
+  ) {
+    toast.error("All fields are required");
+    return null;
+  }
+
   return { title, cookingTime, method, category, price, ingredients, images };
 };
 
@@ -40,50 +53,55 @@ function Create() {
 
   useEffect(() => {
     if (userData) {
-      const newTodo = {
+      const newRecipe = {
         title: userData.title,
         uid: user.uid,
         cookingTime: userData.cookingTime,
         method: userData.method,
         category: userData.category,
         price: userData.price,
-        ingredients: userData.ingredients,
-        images: userData.images,
+        ingredients: addedIngredients,
+        images: uploadedImages, // Updated to use state variable
       };
 
-      addDoc(collection(db, "todos"), newTodo)
+      addDoc(collection(db, "todos"), newRecipe)
         .then(() => {
-          toast.success("New Todo added");
+          toast.success("New Recipe added");
           navigate("/");
         })
         .catch((error) => toast.error(error.message));
     }
-  }, [userData, user.uid, navigate]);
+  }, [userData, user.uid, navigate, addedIngredients, uploadedImages]); // Added uploadedImages to dependency array
 
   const handleAddIngredient = () => {
     const formData = new FormData(document.getElementById("todo-form"));
     const newIngredient = formData.get("ingredients");
     setAddedIngredients([...addedIngredients, newIngredient]);
-    formData.set("ingredients", "");
+    formData.set("ingredients", ""); // Clear the input field after adding
   };
 
   const handleUploadImage = () => {
     const formData = new FormData(document.getElementById("todo-form"));
     const newImage = formData.get("images");
     setUploadedImages([...uploadedImages, newImage]);
-    formData.set("images", "");
+    formData.set("images", ""); // Clear the input field after adding
   };
 
   return (
-    <div className="card bg-base-100 w-96 shadow-xl p-8">
+    <div className="card bg-base-100 shadow-xl p-8 mx-auto w-3/5">
       <Form
         id="todo-form"
         method="post"
-        className="flex flex-col items-center gap-5"
+        className="flex flex-col items-center gap-5 w-full"
       >
-        <h2 className="text-3xl font-semibold">New Todo</h2>
-        <FormInput name="title" type="text" label="Todo title" />
-        <FormInput name="cookingTime" type="number" label="Cooking time" />
+        <h2 className="text-3xl font-semibold">Add New Recipe</h2>
+        <FormInput name="title" type="text" label="Recipe title" required />
+        <FormInput
+          name="cookingTime"
+          type="number"
+          label="Cooking time"
+          required
+        />
         <div className="w-full flex-col gap-5">
           <div className="flex items-end gap-4">
             <FormInput
@@ -91,6 +109,7 @@ function Create() {
               type="text"
               label="Ingredients"
               multiple
+              required
             />
             <button
               className="btn btn-primary w-16"
@@ -100,43 +119,73 @@ function Create() {
               +
             </button>
           </div>
-          <div>
+          <div className="flex w-full gap-3">
             <h3>Added Ingredients:</h3>
-            <ul>
+            <ul className="flex gap-2">
               {addedIngredients.map((ingredient, index) => (
-                <li key={index}>{ingredient}</li>
+                <li key={index}>{ingredient},</li>
               ))}
             </ul>
           </div>
         </div>
 
-        <div className="w-full flex gap-5">
-          <FormInput name="images" type="text" label="Image URL" multiple />
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={handleUploadImage}
-          >
-            Upload
-          </button>
+        <div className="w-full flex-col gap-5">
+          <div className="flex items-end gap-5">
+            <FormInput
+              name="images"
+              type="text"
+              label="Image URL"
+              multiple
+              required
+            />
+            <button
+              className="btn btn-primary w-16"
+              type="button"
+              onClick={handleUploadImage}
+            >
+              +
+            </button>
+          </div>
+          <div className="flex w-full gap-3 items-center">
+            <h3>Uploaded Images:</h3>
+            <ul className="flex flex-wrap gap-3">
+              {uploadedImages.map((image, index) => (
+                <li key={index}>
+                  <img
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    style={{ maxWidth: "50px", maxHeight: "100px" }}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div className="flex w-full gap-3 items-center">
-          <h3>Uploaded Images:</h3>
-          <ul className="flex flex-wrap gap-3">
-            {uploadedImages.map((image, index) => (
-              <li key={index}>
-                <img
-                  src={image}
-                  alt={`Image ${index + 1}`}
-                  style={{ maxWidth: "50px", maxHeight: "100px" }}
-                />
-              </li>
-            ))}
-          </ul>
+
+        <div className="form-control w-full">
+          <label className="label">
+            <span className="label-text">Method</span>
+          </label>
+          <textarea
+            className="textarea textarea-bordered h-24"
+            name="method"
+            placeholder="Method"
+          ></textarea>
         </div>
-        <FormInput name="method" type="text" label="Method" />
-        <FormInput name="category" type="text" label="Category" />
-        <FormInput name="price" type="number" label="Price" />
+
+        <select
+          className="select select-bordered w-full max-w-xs"
+          name="category"
+          defaultValue=""
+        >
+          <option value="" disabled>
+            Select category
+          </option>
+          <option>Uzbek national dishes</option>
+          <option>Turkish foods</option>
+          <option>Fast food</option>
+        </select>
+        <FormInput name="price" type="number" label="Price" required />
 
         <button className="btn btn-primary btn-block">Add</button>
       </Form>

@@ -4,6 +4,7 @@ import { FormInput } from "../components";
 import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
+import cook from "../cook.mp4";
 
 export const action = async ({ request }) => {
   let formData = await request.formData();
@@ -23,11 +24,20 @@ function Login() {
     }
   }, [userData]);
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
-      <div className="hidden lg:block h-full bg-orange-50 bg-[url('https://picsum.photos/1600/2400')] bg-center bg-cover bg-no-repeat"></div>
-      <div className="h-full bg-slate-50 grid place-items-center lg:bg-none bg-[url('https://picsum.photos/1600/2400')] bg-center bg-cover bg-no-repeat bg-fixed">
-        <div className="card bg-base-100 w-96 shadow-xl  p-8">
-          <Form method="post" className="flex flex-col items-center gap-5 ">
+    <div className="grid  ">
+      <video
+        src={cook}
+        autoPlay
+        loop
+        muted
+        className="h-full object-cover absolute inset-0 w-full"
+      />
+      <div className=" w-full  bg-slate-50 grid place-items-center my-32">
+        <div className="card glass w-96 shadow-xl  p-8">
+          <Form
+            method="post"
+            className="flex flex-col w-full mx-auto items-center gap-5 "
+          >
             <h1 className="text-3xl font-semibold">Login</h1>
             <FormInput type="email" label="email" name="email" />
             <FormInput type="password" label="password" name="password" />

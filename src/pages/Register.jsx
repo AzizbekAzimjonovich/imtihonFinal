@@ -3,6 +3,7 @@ import { Form, useActionData } from "react-router-dom";
 import { FormInput } from "../components";
 import { useRegister } from "../hooks/useRegister";
 import { Link } from "react-router-dom";
+import cook from "../cook.mp4";
 
 export const action = async ({ request }) => {
   let formData = await request.formData();
@@ -30,14 +31,16 @@ function Register() {
   }, [userData]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
-      <div className="hidden lg:block h-full bg-orange-50 bg-[url('https://picsum.photos/1600/2400')] bg-center bg-cover bg-no-repeat"></div>
-
-      <div className="h-full bg-slate-50 grid place-items-center lg:bg-none bg-[url('https://picsum.photos/1600/2400')] bg-center bg-cover bg-no-repeat bg-fixed">
-        <div
-          className="card bg-base-100 w-96 shadow-xl p-8"
-          style={{ backgroundColor: "rgba(255, 255, 255, 0.75)" }}
-        >
+    <div className="grid ">
+      <video
+        src={cook}
+        autoPlay
+        loop
+        muted
+        className="h-full object-cover absolute inset-0 w-full"
+      />
+      <div className="h-full bg-slate-50 grid place-items-center mt-4">
+        <div className="card glass w-96 shadow-xl  p-8">
           <Form method="post" className="flex flex-col items-center gap-5 ">
             <h1 className="text-3xl font-semibold">Register</h1>
             <FormInput type="text" label="displayName" name="displayName" />
