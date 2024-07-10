@@ -16,12 +16,10 @@ export const action = async ({ request }) => {
   let price = formData.get("price");
   let ingredients = [];
 
-  // Collect all ingredients from formData
   formData.getAll("ingredients").forEach((ingredient) => {
     ingredients.push(ingredient);
   });
 
-  // Retrieve uploaded images URLs
   let images = [];
   formData.getAll("images").forEach((image) => {
     images.push(image);
@@ -88,7 +86,7 @@ function Create() {
   };
 
   return (
-    <div className="card bg-base-100 shadow-xl p-8 mx-auto w-3/5">
+    <div className="card bg-base-100 shadow-xl p-8 mx-auto w-full max-w-4xl">
       <Form
         id="todo-form"
         method="post"
@@ -102,8 +100,8 @@ function Create() {
           label="Cooking time"
           required
         />
-        <div className="w-full flex-col gap-5">
-          <div className="flex items-end gap-4">
+        <div className="w-full flex flex-col gap-5">
+          <div className="flex items-end gap-4 ">
             <FormInput
               name="ingredients"
               type="text"
@@ -119,9 +117,9 @@ function Create() {
               +
             </button>
           </div>
-          <div className="flex w-full gap-3">
+          <div className="flex w-full gap-3 flex-wrap">
             <h3>Added Ingredients:</h3>
-            <ul className="flex gap-2">
+            <ul className="flex gap-2 flex-wrap">
               {addedIngredients.map((ingredient, index) => (
                 <li key={index}>{ingredient},</li>
               ))}
@@ -129,8 +127,8 @@ function Create() {
           </div>
         </div>
 
-        <div className="w-full flex-col gap-5">
-          <div className="flex items-end gap-5">
+        <div className="w-full flex flex-col gap-5">
+          <div className="flex items-end gap-5 ">
             <FormInput
               name="images"
               type="text"
@@ -146,7 +144,7 @@ function Create() {
               +
             </button>
           </div>
-          <div className="flex w-full gap-3 items-center">
+          <div className="flex w-full gap-3 items-center flex-wrap">
             <h3>Uploaded Images:</h3>
             <ul className="flex flex-wrap gap-3">
               {uploadedImages.map((image, index) => (
@@ -174,9 +172,10 @@ function Create() {
         </div>
 
         <select
-          className="flex select select-bordered w-full "
+          className="flex select select-bordered w-full"
           name="category"
           defaultValue=""
+          required
         >
           <option value="" disabled>
             Select category

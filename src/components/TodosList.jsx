@@ -1,5 +1,6 @@
 import React from "react";
-import { TiDeleteOutline } from "react-icons/ti";
+import { MdDelete } from "react-icons/md";
+
 import { useDispatch } from "react-redux";
 import { deleteDoc, updateDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
@@ -46,24 +47,24 @@ function TodosList({ data }) {
       <h1 className="text-2xl font-semibold md:text-start text-center mb-6">
         Recipes
       </h1>
-      <div className="grid gap-11 mt-11 2xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 mx-auto">
+      <div className="grid gap-11 mt-11 2xl:grid-cols-3 lg:grid-cols-2 lg:gap-16 sm:grid-cols-1 mx-auto">
         {data &&
           data.map((todo) => (
             <div
-              className="card bg-base-100 lg:w-96 shadow-xl cursor-pointer"
+              className="card h-96 bg-base-100 lg:w-96 shadow-xl cursor-pointer"
               key={todo.id}
             >
-              <div className="card-body">
+              <div className="card-body h-52">
                 <div className="flex justify-between">
                   <h2 className="card-title">{todo.title}</h2>
                   <button onClick={() => deleteTodo(todo.id)}>
-                    <TiDeleteOutline />
+                    <MdDelete />
                   </button>
                 </div>
-                <p>{todo.method}</p>
+                <p className=" line-clamp-3">{todo.method}</p>
               </div>
               <figure onClick={() => navigateToSingleProduct(todo.id)}>
-                <img src={todo.images[0]} alt="Recipe" lg:width={500} />
+                <img src={todo.images[0]} alt="Recipe" lg:width={50} />
               </figure>
             </div>
           ))}

@@ -5,6 +5,7 @@ import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
 import cook from "../cook.mp4";
+import { ReducerType } from "@reduxjs/toolkit";
 
 export const action = async ({ request }) => {
   let formData = await request.formData();

@@ -51,9 +51,9 @@ const PieChart = () => {
   };
 
   return (
-    <div className="mb-10">
-      <h2 className="text-center text-xl font-bold mb-5">Category Chart</h2>
-      <div id="chart" className="w-full">
+    <div className="mb-10 flex flex-col mx-auto mt-10">
+      <div id="chart" className="mb-10 mx-auto">
+        <h2 className="text-center text-xl font-bold mb-5">Category Chart</h2>
         <ReactApexChart
           options={options}
           series={series}

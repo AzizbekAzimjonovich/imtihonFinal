@@ -13,7 +13,6 @@ export const useLogin = () => {
   const [isPending, setIsPending] = useState(false);
 
   const loginUser = async (email, password) => {
-    console.log(email, password);
     setIsPending(true);
 
     try {

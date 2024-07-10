@@ -81,7 +81,7 @@ function SingleProduct() {
           </li>
         ))}
       </ul>
-      <div className="mb-5 text-center flex lg:flex-row md:flex-row sm:flex-row flex-col gap-10">
+      <div className="mb-5 mt-11 text-center flex lg:flex-row md:flex-row sm:flex-row flex-col gap-10">
         <div className="flex  items-center gap-5">
           <button className="btn  text-2xl" onClick={minusFunc}>
             -

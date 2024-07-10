@@ -47,11 +47,9 @@ function BarChart() {
 
   return (
     <div className="app">
-      <h2 className="font-bold text-xl mb-5 text-center">
-        According to cooking time (in minutes)
-      </h2>
-      <div className="row">
-        <div className="mixed-chart w-full">
+      <h2 className="font-bold text-xl mb-5 text-center">Cooking time chart</h2>
+      <div className="w-full flex flex-col items-center">
+        <div className="mixed-chart">
           <Chart options={options} series={series} type="bar" width="480" />
         </div>
       </div>

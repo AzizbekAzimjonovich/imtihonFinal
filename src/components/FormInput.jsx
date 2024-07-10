@@ -1,17 +1,19 @@
-function FormInput({ name, label, type }) {
+const FormInput = ({ label, name, type, required }) => {
   return (
-    <label className="form-control w-full ">
-      <div className="label">
-        <span className="label-text capitalize">{label}</span>
-      </div>
+    <div className="form-control w-full">
+      <label className="label">
+        <span className="label-text">
+          {label} {}
+        </span>
+      </label>
       <input
-        type={type}
-        placeholder="Type here"
-        className="input input-bordered w-full  "
+        className="input input-bordered w-full"
         name={name}
+        type={type}
+        required={required}
       />
-    </label>
+    </div>
   );
-}
+};
 
 export default FormInput;
