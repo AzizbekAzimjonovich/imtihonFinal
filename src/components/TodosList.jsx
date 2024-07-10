@@ -46,11 +46,11 @@ function TodosList({ data }) {
       <h1 className="text-2xl font-semibold md:text-start text-center mb-6">
         Recipes
       </h1>
-      <div className="grid grid-cols-3 gap-11 mt-11">
+      <div className="grid gap-11 mt-11 2xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 mx-auto">
         {data &&
           data.map((todo) => (
             <div
-              className="card bg-base-100 w-96 shadow-xl cursor-pointer"
+              className="card bg-base-100 lg:w-96 shadow-xl cursor-pointer"
               key={todo.id}
             >
               <div className="card-body">
@@ -63,7 +63,7 @@ function TodosList({ data }) {
                 <p>{todo.method}</p>
               </div>
               <figure onClick={() => navigateToSingleProduct(todo.id)}>
-                <img src={todo.images[0]} alt="Recipe" />
+                <img src={todo.images[0]} alt="Recipe" lg:width={500} />
               </figure>
             </div>
           ))}
