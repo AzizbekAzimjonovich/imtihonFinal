@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import { IoMdSunny, IoMdMoon } from "react-icons/io";
 import { FaChartSimple } from "react-icons/fa6";
 import { IoCartSharp } from "react-icons/io5";
+import { IoHomeSharp } from "react-icons/io5";
 
 const themes = {
   winter: "winter",
@@ -90,6 +91,12 @@ function Navbar() {
                 <Weather />
               </li>
               <li>
+                <Link to={"/"}>
+                  <IoHomeSharp />
+                  Home
+                </Link>
+              </li>
+              <li>
                 <Link to="/cart">
                   <IoCartSharp />
                   Cart
@@ -125,6 +132,7 @@ function Navbar() {
           </div>
         </div>
       </div>
+      <hr />
     </header>
   );
 }
